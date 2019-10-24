@@ -1802,11 +1802,197 @@ const view = new SceneView({
 
 ---
 
+<!-- .slide: class="section" -->
+
+# Scenes
+
+---
+
+## WebScenes
+
+- [Author and Publish Scenes in Pro](http://pro.arcgis.com/en/pro-app/help/mapping/map-authoring/author-a-web-scene.htm)
+- Modify Publish Scenes in [SceneViewer](https://www.arcgis.com/home/webscene/viewer.html)
+
+---
+
+## WebScenes
+
+```js
+const scene = new WebScene({
+  portalItem: {
+    id: "082c4fd545104f159db39da11ea1e675"
+  }
+});
+
+const view = new SceneView({
+  map: scene,
+  container: "viewDiv"
+});
+```
+
+---
+
+## SceneView
+
+- Render Scenes
+- [Camera](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-SceneView.html#camera)
+- [Environment](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-SceneView.html#environment)
+
+---
+
+## Camera
+
+- Specific location (x, y z)
+- Pointed in a specific direction
+- Tilted at a specific angle
+- Specific field of view
+
+---
+
+## Camera
+
+```js
+const view = new SceneView({
+  map,
+  container: "viewDiv",
+  camera: {
+    position: [7.654, 45.919, 5183],
+    tilt: 80
+  }
+});
+// some point in your application, you can update the camera.
+view.goTo({
+  position: [7.654, 45.919, 7500],
+  tilt: 65
+});
+```
+
+---
+
+## Environment
+
+- defines light characteristics
+- stars!
+
+```js
+sceneView.environment = {
+  atmosphere: {
+    quality: 'high'
+  },
+
+  starsEnabled: true,
+
+  lighting: {
+    directShadowsEnabled: true,
+    ambientOcclusionEnabled: true,
+
+    // The time and date for which
+    // the sun position and light direction is computed.
+    date: new Date("Mon Oct 15 2018")
+  }
+};
+```
+
+- [Sample](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=sceneview-stars)
+
+---
+
 ## Exercise - Display a WebScene
 
--[Display a WebScene](https://developers.arcgis.com/javascript/latest/guide/display-a-web-scene/)
+- [Display a WebScene](https://developers.arcgis.com/javascript/latest/guide/display-a-web-scene/)
  - also watch for the view camera to change
  - have fun watching for other properties to change
+
+---
+
+## Exercise - Create a 3D Scene with a Layer
+
+- [Create a 3D Scene with a Layer](https://developers.arcgis.com/javascript/latest/guide/add-layers-to-a-3d-scene/)
+
+---
+
+<!-- .slide: class="section" -->
+
+# Graphics
+
+---
+
+## GraphicsLayer
+
+- Simple _bag of graphics_
+- Can contain mixed geometries
+- Good for temporart graphics
+- Can have individual symbols
+- _No renderer support_
+
+---
+
+## Drawing Graphics
+
+- Use the [Sketch widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Sketch.html)
+- Tool to draw different types of graphics
+
+---
+
+## Sketch Widget
+
+```js
+const sketch = new Sketch({
+  layer: graphicsLayer,
+  view: view
+});
+
+sketch.on("create", function(event) {
+  // check if the create event's state has changed to complete indicating
+  // the graphic create operation is completed.
+  if (event.state === "complete") {
+    // remove the graphic from the layer. Sketch adds
+    // the completed graphic to the layer by default.
+    polygonGraphicsLayer.remove(event.graphic);
+    // use the graphic.geometry to query features that intersect it
+    selectFeatures(event.graphic.geometry);
+  }
+});
+```
+
+---
+
+## Exercise - Draw Graphics
+
+- [Draw Graphics](https://developers.arcgis.com/javascript/latest/guide/draw-graphics/)
+
+---
+
+# Geometry Engine
+
+- Client-side geometry tools
+- Can provide spatial analysis tooling
+- Many of the same functions as [geometry service](https://developers.arcgis.com/rest/services-reference/geometry-service.htm)
+- Option to run _asynchronously_
+
+---
+
+```js
+//check if buffer is completely within Utah -- UtahBoundary is a polygon geometry
+const within = geometryEngine.within(bufferGeom, UtahBoundary);
+//check if buffer overlaps Utah
+const overlaps = geometryEngine.overlaps(bufferGeom, UtahBoundary);
+if(!within && overlaps){
+  //If buffer is not within Utah, but overlaps it, then only keep the portion within Utah
+  bufferGeom = geometryEngine.intersect(bufferGeom, UtahBoundary);
+}
+if(!within && !overlaps){
+  //If buffer is completely outside Utah, then don't attempt any overlay
+  console.log("outside of utah!");
+  return;
+}
+```
+
+---
+
+## Exercise - Buffer and Intersect Geometry
+
+- [Buffer and Intersect Geometry](https://developers.arcgis.com/javascript/latest/guide/buffer-and-intersect-geometry/)
 
 ---
 
@@ -1820,7 +2006,7 @@ const view = new SceneView({
 
 - [Out of the box widgets at 4.x](https://developers.arcgis.com/javascript/latest/sample-code/get-started-widgets/index.html):
  - A lot of widgets!
-- New design and user experience
+- Responsive
 
 ---
 
@@ -1917,104 +2103,73 @@ view.ui.add(legend, "top-left");
 
 ---
 
-<!-- .slide: class="section" -->
+## Search
 
-# Scenes
-
----
-
-## WebScenes
-
-- [Author and Publish Scenes in Pro](http://pro.arcgis.com/en/pro-app/help/mapping/map-authoring/author-a-web-scene.htm)
-- Modify Publish Scenes in [SceneViewer](https://www.arcgis.com/home/webscene/viewer.html)
+- Find addresses, places, and more
+- Can use FeatureLayer as a source
+- Can provide a custom source
+- If app is logged into a Portal, it will use the Portal services
+- Simplify the Locator services
 
 ---
 
-## WebScenes
+## Exercises - Find address and places
 
-```js
-const scene = new WebScene({
-  portalItem: {
-    id: "082c4fd545104f159db39da11ea1e675"
-  }
-});
-
-const view = new SceneView({
-  map: scene,
-  container: "viewDiv"
-});
-```
+- [Search for and Address](https://developers.arcgis.com/javascript/latest/guide/search-for-an-address/)
+- [Find Places](https://developers.arcgis.com/javascript/latest/guide/find-places/)
 
 ---
 
-## SceneView
+## Directions
 
-- Render Scenes
-- [Camera](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-SceneView.html#camera)
-- [Environment](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-SceneView.html#environment)
-
----
-
-## Camera
-
-- Specific location (x, y z)
-- Pointed in a specific direction
-- Tilted at a specific angle
-- Specific field of view
+- Can find routes and directions
+- Based on drive time, walk time, time of day, etc
+- Requires authentication
+- Premium Services
 
 ---
 
-## Camera
+## Exercises - Directions and Routing
 
-```js
-const view = new SceneView({
-  map,
-  container: "viewDiv",
-  camera: {
-    position: [7.654, 45.919, 5183],
-    tilt: 80
-  }
-});
-// some point in your application, you can update the camera.
-view.goTo({
-  position: [7.654, 45.919, 7500],
-  tilt: 65
-});
-```
+- [Driving Directions](https://developers.arcgis.com/javascript/latest/guide/driving-directions/)
+- [Get route and directions](https://developers.arcgis.com/javascript/latest/guide/get-a-route-and-directions/)
+- [Get Drive Time](https://developers.arcgis.com/javascript/latest/guide/get-drive-time/)
 
 ---
 
-## Environment
+## OAuth Authentication
 
-- defines light characteristics
-- stars!
-
-```js
-sceneView.environment = {
-  atmosphere: {
-    quality: 'high'
-  },
-
-  starsEnabled: true,
-
-  lighting: {
-    directShadowsEnabled: true,
-    ambientOcclusionEnabled: true,
-
-    // The time and date for which
-    // the sun position and light direction is computed.
-    date: new Date("Mon Oct 15 2018")
-  }
-};
-```
-
-- [Sample](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=sceneview-stars)
+- Required for secure services and premium content
+- Named User login
+- App login
 
 ---
 
-<!-- .slide: class="section" -->
+- [IdentityManager](https://developers.arcgis.com/javascript/latest/api-reference/esri-identity-IdentityManager.html)
+  - Core of authentication in JSAPI
+  - Can handle multiple portals and authentication schemes
+  - OAuth, IWA, PKI
 
-# [Create a 3D Scene with a Layer](https://developers.arcgis.com/labs/javascript/add-layers-to-a-3d-scene/)
+---
+
+- [Portal](https://developers.arcgis.com/javascript/latest/api-reference/esri-portal-Portal.html)
+  - Log in to a Portal
+  - Portal settings propagate throughout your app
+  - Basemaps, Routing, Directions, Search
+
+---
+
+# Exercise
+
+- [Access Services with OAuth](https://developers.arcgis.com/javascript/latest/guide/access-services-with-oauth-2/)
+
+---
+
+## Custom Application Development
+
+---
+
+## ArcGIS CLI
 
 ---
 
