@@ -2167,9 +2167,29 @@ view.ui.add(legend, "top-left");
 
 ## Custom Application Development
 
+- You have some choices
+- [webpack](https://developers.arcgis.com/javascript/latest/guide/webpack/)
+- [esri-loader](https://developers.arcgis.com/javascript/latest/guide/esri-loader/)
+- [Pick a framework](https://developers.arcgis.com/javascript/latest/guide/using-frameworks/)
+
 ---
 
 ## ArcGIS CLI
+
+- [Scaffold applications](https://developers.arcgis.com/javascript/latest/guide/arcgis-cli/)
+
+```sh
+npm install -g @arcgis/cli
+
+# regular app
+arcgis create my-application
+
+# react app
+arcgis create my-react-application -t react
+
+# vue app
+arcgis create my-vue-application -t vue
+```
 
 ---
 
