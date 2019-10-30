@@ -7,7 +7,7 @@
 <h2 style="text-align: left; font-size: 60px;">with the ArcGIS API for JavaScript</h2>
 <h2 style="text-align: left; font-size: 60px;">Berlin, 2019</h2>
 <p style="text-align: left; font-size: 30px;">Rene Rubalcava</p>
-    <p style="text-align: left; font-size: 30px;">slides: <a href="https://git.io/fjrz4" target="_blank">https://git.io/fjrz4</a></p>
+    <p style="text-align: left; font-size: 30px;">slides: <a href="https://git.io/JezO1" target="_blank">https://git.io/JezO1</a></p>
 
 <!--
 Learn how to use ArcGIS API for JavaScript to build high-performing, engaging web applications. This course introduces the classes available in the API and how to use them in a JavaScript-based web application. You will also learn how to enhance your applications by incorporating ready-to-use content and ArcGIS services.
