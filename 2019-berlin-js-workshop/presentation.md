@@ -842,7 +842,7 @@ const layer = new MapImageLayer({
 
 ## MapImageLayer
 
-<iframe height='600' scrolling='no' title='4.5 - MapImageLayer' src='//codepen.io/odoe/embed/preview/eGVeWY/?height=300&theme-id=31222&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/eGVeWY/'>4.5 - MapImageLayer</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='600' scrolling='no' title='4.5 - MapImageLayer' src='//codepen.io/odoe/embed/preview/eGVeWY/?height=300&theme-id=31222&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/eGVeWY/'>MapImageLayer</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ---
@@ -992,9 +992,7 @@ view.whenLayerView(fLayer)
 
 <!-- .slide: class="section" -->
 
-## [Query LayerView - Exercise](https://codepen.io/odoe/pen/KXYrQx?editors=0010)
-
-## [Query LayerView - Solution](https://codepen.io/odoe/pen/vJdVpQ?editors=0010)
+## [Query LayerView When Done](https://codepen.io/odoe/pen/vJdVpQ?editors=0010)
 
 ---
 
@@ -1235,6 +1233,7 @@ view.popup.viewModel.on("trigger-action", function(event) {
   }
 });
 ```
+
 ---
 
 ## Popups - Asynchronous
