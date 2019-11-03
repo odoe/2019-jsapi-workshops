@@ -1749,6 +1749,7 @@ const webmaps = webmapids.map(webmapid =>  {
 - [Display a WebMap](https://developers.arcgis.com/javascript/latest/guide/display-a-web-map/)
  - also watch for the view center to change
  - have fun watching for other properties to change
+
 ---
 
 ## WebScene specific - `slides`
@@ -2204,5 +2205,5 @@ arcgis create my-vue-application -t vue
 
 ---
 
+<!-- .slide: data-background="./template/end.png" -->
 
-<!-- .slide: class="end" -->
